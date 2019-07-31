@@ -35,9 +35,6 @@ import styles from "../../../helpers/styles";
 import utils from "../../../helpers/utils";
 import { translateDateline } from "../../../helpers/dateline";
 
-const BASE_CANVAS_WIDTH_PADDING = constants.BASE_CANVAS_WIDTH_PADDING;
-const DEFAULT_HEIGHT = constants.DEFAULT_HEIGHT;
-
 /**
  * Updates the height and width of the canvas on resize
  *
@@ -49,12 +46,7 @@ const DEFAULT_HEIGHT = constants.DEFAULT_HEIGHT;
 const translateCanvas = (config, canvasSVG) =>
     canvasSVG
         .attr("height", config.canvasHeight + getAxisInfoRowLabelHeight(config))
-        .attr(
-            "width",
-            config.padding.hasCustomPadding
-                ? config.canvasWidth
-                : config.canvasWidth - BASE_CANVAS_WIDTH_PADDING
-        );
+        .attr("width", config.canvasWidth);
 /**
  * Checks if axis info row labels are present and updates the canvas height
  *
@@ -583,7 +575,7 @@ const determineHeight = (config, dimension) => {
         return dimension.height;
     }
     const verticalPadding = config.padding.top + config.padding.bottom;
-    const halfHeight = (DEFAULT_HEIGHT - verticalPadding) / 2;
+    const halfHeight = (constants.DEFAULT_HEIGHT - verticalPadding) / 2;
     return (
         halfHeight * config.outlierStretchFactor.upperLimit +
         halfHeight * config.outlierStretchFactor.lowerLimit

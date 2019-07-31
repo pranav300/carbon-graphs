@@ -7,7 +7,11 @@ module.exports = function(config) {
         customLaunchers: {
             ChromeHeadlessCustom: {
                 base: "ChromeHeadless",
-                flags: ["--disable-web-security", "--no-sandbox"],
+                flags: [
+                    "--disable-web-security",
+                    "--no-sandbox",
+                    "--disable-setuid-sandbox"
+                ],
                 debug: false
             }
         },

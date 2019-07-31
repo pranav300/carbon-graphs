@@ -1,8 +1,6 @@
 "use strict";
 import d3 from "d3";
 import Construct from "../../core/Construct";
-import { getYAxisHeight } from "../../helpers/axis";
-import constants from "../../helpers/constants";
 import errors from "../../helpers/errors";
 import { createLegend } from "../../helpers/legend";
 import styles from "../../helpers/styles";
@@ -34,36 +32,12 @@ import {
     updateAxesDomain
 } from "./helpers/creationHelpers";
 import { translateGraph, translateLabelText } from "./helpers/translateHelpers";
+import { setCanvasWidth, setCanvasHeight } from "../../helpers/padding";
 
 /**
  * @typedef {object} Gantt
  * @typedef {object} GanttConfig
  */
-
-const BASE_CANVAS_WIDTH_PADDING = constants.BASE_CANVAS_WIDTH_PADDING;
-/**
- * Sets the canvas width
- *
- * @private
- * @param {HTMLElement} container - d3 HTML element object which forms the chart container
- * @param {object} config - config object derived from input JSON
- * @returns {undefined} - returns nothing
- */
-const setCanvasWidth = (container, config) => {
-    config.canvasWidth = parseInt(container.style("width"), 10);
-};
-/**
- * Sets the canvas width. Canvas rests within a container.
- * On resize, the canvas is subjected to resizing but its sibling: Legend isnt.
- *
- * @private
- * @param {object} config - config object derived from input JSON
- * @returns {undefined} - returns nothing
- */
-const setCanvasHeight = (config) =>
-    (config.canvasHeight =
-        getYAxisHeight(config) +
-        (config.padding.bottom * 2 + config.padding.top) * 2);
 /**
  * Data point sets can be loaded using this function.
  * Load function validates, clones and stores the input onto a config object.
@@ -198,12 +172,7 @@ class Gantt extends Construct {
             .classed(styles.canvas, true)
             .attr("role", "img")
             .attr("height", this.config.canvasHeight)
-            .attr(
-                "width",
-                this.config.padding.hasCustomPadding
-                    ? this.config.canvasWidth
-                    : this.config.canvasWidth - BASE_CANVAS_WIDTH_PADDING
-            );
+            .attr("width", this.config.canvasWidth);
         createDefs(this.config, this.svg);
         createGrid(this.axis, this.scale, this.config, this.svg);
         createContentContainer(this.config, this.svg);

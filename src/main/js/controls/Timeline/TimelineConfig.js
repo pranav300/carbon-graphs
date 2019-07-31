@@ -22,7 +22,7 @@ export const processInput = (input, config) => {
     config.bindTo = input.bindTo;
     config.bindLegendTo = input.bindLegendTo;
     config.padding = getDefaultValue(input.padding, constants.PADDING);
-    config.padding.hasCustomPadding = utils.isDefined(input.padding);
+    config.hasCustomPadding = utils.isDefined(input.padding);
     config.axis = {
         x: {}
     };

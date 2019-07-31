@@ -119,31 +119,29 @@ const validateEventData = (content) => {
  * @param {object} inputPadding - input padding provided via input JSON.
  * @returns {object} - padding for Gantt
  */
-const getPadding = (config, inputPadding) => {
-    if (utils.isDefined(config.padding)) {
-        return {
-            top: getDefaultValue(inputPadding.top, constants.PADDING.top),
-            bottom: getDefaultValue(
-                inputPadding.bottom,
-                constants.PADDING.bottom
-            ),
-            right: getDefaultValue(inputPadding.right, constants.PADDING.right),
-            left: getDefaultValue(
-                inputPadding.left,
-                constants.PADDING.trackLabel
-            ),
-            hasCustomPadding: true
-        };
-    } else {
-        return {
-            top: constants.PADDING.top,
-            bottom: constants.PADDING.bottom,
-            right: constants.PADDING.right,
-            left: constants.PADDING.trackLabel,
-            hasCustomPadding: false
-        };
-    }
-};
+const processPadding = (config, inputPadding) =>
+    utils.isDefined(config.padding)
+        ? {
+              top: getDefaultValue(inputPadding.top, constants.PADDING.top),
+              bottom: getDefaultValue(
+                  inputPadding.bottom,
+                  constants.PADDING.bottom
+              ),
+              right: getDefaultValue(
+                  inputPadding.right,
+                  constants.PADDING.right
+              ),
+              left: getDefaultValue(
+                  inputPadding.left,
+                  constants.PADDING.trackLabel
+              )
+          }
+        : {
+              top: constants.PADDING.top,
+              bottom: constants.PADDING.bottom,
+              right: constants.PADDING.right,
+              left: constants.PADDING.trackLabel
+          };
 /**
  * Processes the input from the JSON and updates the config object.
  * d3 domain and ranges are stored based on the upper and lower x limits.
@@ -158,7 +156,8 @@ export const processInput = (input, config) => {
     config.clipPathId = generateClipPathId();
     config.bindTo = input.bindTo;
     config.bindLegendTo = input.bindLegendTo;
-    config.padding = getPadding(config, input.padding);
+    config.padding = processPadding(config, input.padding);
+    config.hasCustomPadding = utils.isDefined(input.padding);
     config.axis = {
         x: {},
         y: {}

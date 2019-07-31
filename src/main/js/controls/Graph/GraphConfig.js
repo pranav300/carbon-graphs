@@ -29,28 +29,26 @@ const initialAxisInfo = {
  * @param {object} inputPadding - input padding provided via input JSON.
  * @returns {object} - padding for Graph
  */
-const getPadding = (config, inputPadding) => {
-    if (utils.isDefined(config.padding)) {
-        return {
-            top: getDefaultValue(inputPadding.top, constants.PADDING.top),
-            bottom: getDefaultValue(
-                inputPadding.bottom,
-                constants.PADDING.bottom
-            ),
-            right: getDefaultValue(inputPadding.right, constants.PADDING.right),
-            left: getDefaultValue(inputPadding.left, constants.PADDING.left),
-            hasCustomPadding: true
-        };
-    } else {
-        return {
-            top: constants.PADDING.top,
-            bottom: constants.PADDING.bottom,
-            right: constants.PADDING.right,
-            left: constants.PADDING.left,
-            hasCustomPadding: false
-        };
-    }
-};
+const processPadding = (config, inputPadding) =>
+    utils.isDefined(config.padding)
+        ? {
+              top: getDefaultValue(inputPadding.top, constants.PADDING.top),
+              bottom: getDefaultValue(
+                  inputPadding.bottom,
+                  constants.PADDING.bottom
+              ),
+              right: getDefaultValue(
+                  inputPadding.right,
+                  constants.PADDING.right
+              ),
+              left: getDefaultValue(inputPadding.left, constants.PADDING.left)
+          }
+        : {
+              top: constants.PADDING.top,
+              bottom: constants.PADDING.bottom,
+              right: constants.PADDING.right,
+              left: constants.PADDING.left
+          };
 /**
  * Processes the input from the JSON and updates the config object.
  * d3 domain and ranges are stored based on the upper and lower x, y and y2 limits.
@@ -84,7 +82,8 @@ export const processInput = (input, config, type) => {
     config.bindLegendTo = input.bindLegendTo;
     config.axis = _axis;
     config.dateline = getDefaultValue(utils.deepClone(input.dateline), []);
-    config.padding = getPadding(config, input.padding);
+    config.padding = processPadding(config, input.padding);
+    config.hasCustomPadding = utils.isDefined(input.padding);
     config.locale = getDefaultValue(input.locale, DEFAULT_LOCALE);
     config.showNoDataText = getDefaultValue(input.showNoDataText, true);
     config.d3Locale = d3.locale(getDefaultValue(input.locale, DEFAULT_LOCALE));

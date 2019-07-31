@@ -7,10 +7,10 @@ import {
     createAxes,
     createAxisReferenceLine,
     createXAxisInfoRow,
-    getAxesDataRange,
-    getYAxisHeight
+    getAxesDataRange
 } from "../../helpers/axis";
 import constants, { AXIS_TYPE } from "../../helpers/constants";
+import { setCanvasWidth, setCanvasHeight } from "../../helpers/padding";
 import errors from "../../helpers/errors";
 import { createLegend } from "../../helpers/legend";
 import { createRegionContainer } from "../../helpers/region";
@@ -39,36 +39,6 @@ import {
  * @typedef {object} Graph
  * @typedef {object} GraphConfig
  */
-
-const BASE_CANVAS_WIDTH_PADDING = constants.BASE_CANVAS_WIDTH_PADDING;
-/**
- * Sets the canvas width
- *
- * @private
- * @param {HTMLElement} container - d3 HTML element object which forms the chart container
- * @param {object} config - config object derived from input JSON
- * @returns {undefined} - returns nothing
- */
-const setCanvasWidth = (container, config) => {
-    config.canvasWidth = parseInt(container.style("width"), 10);
-};
-
-/**
- * Sets the canvas width. Canvas rests within a container.
- * On resize, the canvas is subjected to resizing but its sibling: Legend isnt.
- *
- * @private
- * @param {object} config - config object derived from input JSON
- * @returns {undefined} - returns nothing
- */
-const setCanvasHeight = (config) => {
-    config.canvasHeight =
-        getYAxisHeight(config) +
-        (config.padding.bottom +
-            config.padding.top +
-            config.axisLabelHeights.x) *
-            2;
-};
 /**
  * Checks if the min max range of the values have changed or otherwise
  *
@@ -230,12 +200,7 @@ class Graph extends Construct {
             .classed(styles.canvas, true)
             .attr("role", "img")
             .attr("height", this.config.canvasHeight)
-            .attr(
-                "width",
-                this.config.padding.hasCustomPadding
-                    ? this.config.canvasWidth
-                    : this.config.canvasWidth - BASE_CANVAS_WIDTH_PADDING
-            );
+            .attr("width", this.config.canvasWidth);
         createDefs(this.config, this.svg);
         createRegionContainer(this.config, this.svg);
         createGrid(this.axis, this.scale, this.config, this.svg);
