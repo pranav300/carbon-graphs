@@ -1202,7 +1202,7 @@ describe("Graph", () => {
                     `.${styles.contentContainer}`
                 );
                 expect(toNumber(contentContainer.attr("x"), 10)).toBeCloserTo(
-                    0
+                    21
                 );
                 expect(toNumber(contentContainer.attr("y"), 10)).toBeCloserTo(
                     graphConfig.padding.bottom
@@ -1213,7 +1213,7 @@ describe("Graph", () => {
                             graph.config.axisLabelWidths.y,
                         10
                     )
-                ).toBeCloserTo(0);
+                ).toBeCloserTo(21);
                 expect(getYAxisHeight(graph.config)).toBeCloserTo(267);
             });
             it("Resizes correctly after rendering", (done) => {
@@ -1260,7 +1260,7 @@ describe("Graph", () => {
                     `.${styles.contentContainer}`
                 );
                 expect(toNumber(contentContainer.attr("x"), 10)).toBeCloserTo(
-                    0
+                    21
                 );
                 expect(toNumber(contentContainer.attr("y"), 10)).toBeCloserTo(
                     toNumber(
@@ -1286,7 +1286,7 @@ describe("Graph", () => {
                     `.${styles.contentContainer}`
                 );
                 expect(toNumber(contentContainer.attr("x"), 10)).toBeCloserTo(
-                    0
+                    21
                 );
                 expect(toNumber(contentContainer.attr("y"), 10)).toBeCloserTo(
                     graphConfig.padding.top
@@ -2604,7 +2604,7 @@ describe("Graph", () => {
                 );
                 expect(
                     toNumber(contentContainer.getAttribute("x"), 10)
-                ).toBeCloserTo(0);
+                ).toBeCloserTo(21);
                 expect(
                     toNumber(contentContainer.getAttribute("y"), 10)
                 ).toBeCloserTo(0);
@@ -2677,7 +2677,7 @@ describe("Graph", () => {
                     );
                     expect(
                         toNumber(contentContainer.attr("width"), 10)
-                    ).toBeCloserTo(762);
+                    ).toBeCloserTo(712);
                     expect(
                         toNumber(contentContainer.attr("height"))
                     ).toBeCloserTo(250);
@@ -2785,7 +2785,7 @@ describe("Graph", () => {
                     `.${styles.contentContainer}`
                 );
                 expect(toNumber(contentContainer.attr("x"), 10)).toBeCloserTo(
-                    0
+                    21
                 );
                 expect(toNumber(contentContainer.attr("y"), 10)).toBeCloserTo(
                     0
@@ -2796,7 +2796,7 @@ describe("Graph", () => {
                             graph.config.axisLabelWidths.y,
                         10
                     )
-                ).toBeCloserTo(0);
+                ).toBeCloserTo(21);
                 expect(getYAxisHeight(graph.config)).toBeCloserTo(267);
             });
             it("Renders correctly on another resize", (done) => {
