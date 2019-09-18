@@ -577,9 +577,6 @@ const getYAxisHeight = (config) => config.height;
  * @returns {number} Height of the X Axis ticks, labels and numbers/datetimes
  */
 const getXAxisHeight = (config) => {
-    if (config.padding.hasCustomPadding) {
-        return config.padding.bottom;
-    }
     const scale = getScale(config.axis.x.type)
         .domain(config.axis.x.domain)
         .range([0, config.canvasWidth]);
@@ -654,9 +651,6 @@ const getAxisLabelHeight = (label) => {
  * @returns {number} label width
  */
 const getYAxisWidth = (id, config) => {
-    if (config.padding.hasCustomPadding) {
-        return config.padding.left;
-    }
     const scale = d3.scale
         .linear()
         .domain([
@@ -683,16 +677,9 @@ const getYAxisWidth = (id, config) => {
  * @param {object} config - config object derived from input JSON.
  * @returns {number} label width
  */
-const getY2AxisWidth = (config) => {
-    if (config.padding.hasCustomPadding) {
-        return config.padding.right;
-    }
-    return (
-        (hasY2Axis(config.axis)
-            ? getYAxisWidth(constants.Y2_AXIS, config)
-            : 20) + config.padding.right
-    );
-};
+const getY2AxisWidth = (config) =>
+    (hasY2Axis(config.axis) ? getYAxisWidth(constants.Y2_AXIS, config) : 20) +
+    config.padding.right;
 /**
  * Checks if X Axis orientation is set to top
  *
@@ -714,9 +701,8 @@ const isXAxisOrientationTop = (xAxisOrientation) =>
  */
 const calculateAxesSize = (config) => {
     config.axisSizes = {};
-    config.axisSizes.y = config.padding.hasCustomPadding
-        ? getYAxisWidth(constants.Y_AXIS, config)
-        : getYAxisWidth(constants.Y_AXIS, config) + config.padding.left;
+    config.axisSizes.y =
+        getYAxisWidth(constants.Y_AXIS, config) + config.padding.left;
     config.axisSizes.y2 = getY2AxisWidth(config);
     config.axisSizes.x = getXAxisHeight(config);
 };
