@@ -148,7 +148,7 @@ export const AXES_ORIENTATION = {
  */
 export default {
     PADDING: {
-        top: 10,
+        top: 20,
         bottom: 5,
         left: 30,
         right: 50,

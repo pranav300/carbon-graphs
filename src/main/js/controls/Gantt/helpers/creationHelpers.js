@@ -170,9 +170,6 @@ const calculateAxesLabelSize = (config) => {
  * @returns {number} label width
  */
 const getYAxisWidth = (id, config) => {
-    if (config.padding.hasCustomPadding) {
-        return config.padding.left;
-    }
     const scale = d3.scale
         .ordinal()
         .domain(getYAxisDomain(config.axis.y.trackList))
