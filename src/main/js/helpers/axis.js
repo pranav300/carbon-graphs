@@ -641,7 +641,10 @@ const getAxisLabelHeight = (label) => {
     const svg = dummy.append("svg");
     const grouper = svg.append("g");
     buildAxisLabel(grouper, label);
-    const height = grouper.node().getBoundingClientRect().height;
+    const height =
+        window.navigator.platform === "Win32"
+            ? grouper.node().getBoundingClientRect().height - 2
+            : grouper.node().getBoundingClientRect().height;
     dummy.remove();
     return height;
 };
