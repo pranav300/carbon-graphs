@@ -41,6 +41,8 @@ import {
  */
 
 const BASE_CANVAS_WIDTH_PADDING = constants.BASE_CANVAS_WIDTH_PADDING;
+
+const LIVE_GRAPHS = [];
 /**
  * Sets the canvas width
  *
@@ -222,6 +224,7 @@ class Graph extends Construct {
         processInput(input, this.config, this.config.axis.x.type);
         beforeInit(this);
         init(this);
+        LIVE_GRAPHS.push(this);
         const containerSVG = d3
             .select(this.config.bindTo)
             .append("div")
@@ -363,9 +366,15 @@ class Graph extends Construct {
      * @returns {Graph} - Graph instance
      */
     destroy() {
-        detachEventHandlers(this);
-        d3RemoveElement(this.graphContainer, `.${styles.canvas}`);
-        d3RemoveElement(this.graphContainer, `.${styles.container}`);
+        for (let i = LIVE_GRAPHS.length - 1; i >= 0; i--) {
+            detachEventHandlers(LIVE_GRAPHS[i]);
+            d3RemoveElement(LIVE_GRAPHS[i].graphContainer, `.${styles.canvas}`);
+            d3RemoveElement(
+                LIVE_GRAPHS[i].graphContainer,
+                `.${styles.container}`
+            );
+            LIVE_GRAPHS.pop();
+        }
         initConfig(this);
         return this;
     }
