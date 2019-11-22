@@ -61,7 +61,7 @@ describe("Line - Panning", () => {
                     datelineGroup.getAttribute("transform")
                 ).translate;
                 expect(toNumber(translate[0], 10)).toBeGreaterThanOrEqual(72);
-                expect(toNumber(translate[1], 10)).toBeCloseTo(5);
+                expect(toNumber(translate[1], 10)).toBeCloseTo(2);
                 done();
             });
         });
@@ -97,7 +97,7 @@ describe("Line - Panning", () => {
                     datelineGroup.getAttribute("transform")
                 ).translate;
                 expect(toNumber(translate[0], 10)).toBeGreaterThanOrEqual(72);
-                expect(toNumber(translate[1], 10)).toBeCloseTo(5);
+                expect(toNumber(translate[1], 10)).toBeCloseTo(2);
                 done();
             });
         });

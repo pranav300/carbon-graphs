@@ -77,7 +77,7 @@ describe("Panning", () => {
                     datelineGroupElement.getAttribute("transform")
                 ).translate;
                 expect(toNumber(translate[0], 10)).toBeCloseTo(106);
-                expect(toNumber(translate[1], 10)).toBeCloseTo(5);
+                expect(toNumber(translate[1], 10)).toBeCloseTo(2);
                 done();
             });
         });
@@ -114,7 +114,7 @@ describe("Panning", () => {
                     datelineGroupElement.getAttribute("transform")
                 ).translate;
                 expect(toNumber(translate[0], 10)).toBeCloseTo(106);
-                expect(toNumber(translate[1], 10)).toBeCloseTo(5);
+                expect(toNumber(translate[1], 10)).toBeCloseTo(2);
                 done();
             });
         });
@@ -150,7 +150,7 @@ describe("Panning", () => {
                     datelineGroupElement.getAttribute("transform")
                 ).translate;
                 expect(toNumber(translate[0], 10)).toBeCloseTo(106);
-                expect(toNumber(translate[1], 10)).toBeCloseTo(5);
+                expect(toNumber(translate[1], 10)).toBeCloseTo(2);
                 done();
             });
         });
