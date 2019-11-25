@@ -806,7 +806,9 @@ describe("Gantt - Generate", () => {
                     datelineGroupElement.getAttribute("transform")
                 ).translate;
                 expect(toNumber(translate[0], 10)).toBeCloseTo(106);
-                expect(toNumber(translate[1], 10)).toBeCloseTo(2);
+                expect(toNumber(translate[1], 10)).toBeCloseTo(
+                    constants.BASE_PADDING_BOTTOM
+                );
                 done();
             });
             expect(datelineGroupElement.childNodes.length).toBe(2);

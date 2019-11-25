@@ -11,6 +11,7 @@ import {
     datelineJSON
 } from "./helpers";
 import utils from "../../../../main/js/helpers/utils";
+import constants from "../../../../main/js/helpers/constants";
 import { delay, toNumber } from "../../helpers/commonHelpers";
 
 describe("Panning", () => {
@@ -77,7 +78,9 @@ describe("Panning", () => {
                     datelineGroupElement.getAttribute("transform")
                 ).translate;
                 expect(toNumber(translate[0], 10)).toBeCloseTo(106);
-                expect(toNumber(translate[1], 10)).toBeCloseTo(2);
+                expect(toNumber(translate[1], 10)).toBeCloseTo(
+                    constants.BASE_PADDING_BOTTOM
+                );
                 done();
             });
         });
@@ -114,7 +117,9 @@ describe("Panning", () => {
                     datelineGroupElement.getAttribute("transform")
                 ).translate;
                 expect(toNumber(translate[0], 10)).toBeCloseTo(106);
-                expect(toNumber(translate[1], 10)).toBeCloseTo(2);
+                expect(toNumber(translate[1], 10)).toBeCloseTo(
+                    constants.BASE_PADDING_BOTTOM
+                );
                 done();
             });
         });
@@ -150,7 +155,9 @@ describe("Panning", () => {
                     datelineGroupElement.getAttribute("transform")
                 ).translate;
                 expect(toNumber(translate[0], 10)).toBeCloseTo(106);
-                expect(toNumber(translate[1], 10)).toBeCloseTo(2);
+                expect(toNumber(translate[1], 10)).toBeCloseTo(
+                    constants.BASE_PADDING_BOTTOM
+                );
                 done();
             });
         });

@@ -16,7 +16,10 @@ import {
     axisTimeSeries
 } from "./helpers";
 import { getSVGAnimatedTransformList } from "../../../../main/js/helpers/transformUtils";
-import { COLORS, SHAPES } from "../../../../main/js/helpers/constants";
+import constants, {
+    COLORS,
+    SHAPES
+} from "../../../../main/js/helpers/constants";
 
 describe("Bar - Panning", () => {
     let graphDefault = null;
@@ -68,7 +71,9 @@ describe("Bar - Panning", () => {
                     datelineGroup.getAttribute("transform")
                 ).translate;
                 expect(toNumber(translate[0], 10)).toBeGreaterThanOrEqual(72);
-                expect(toNumber(translate[1], 10)).toBeCloseTo(2);
+                expect(toNumber(translate[1], 10)).toBeCloseTo(
+                    constants.BASE_PADDING_BOTTOM
+                );
                 done();
             });
         });
@@ -104,7 +109,9 @@ describe("Bar - Panning", () => {
                     datelineGroup.getAttribute("transform")
                 ).translate;
                 expect(toNumber(translate[0], 10)).toBeGreaterThanOrEqual(72);
-                expect(toNumber(translate[1], 10)).toBeCloseTo(2);
+                expect(toNumber(translate[1], 10)).toBeCloseTo(
+                    constants.BASE_PADDING_BOTTOM
+                );
                 done();
             });
         });
